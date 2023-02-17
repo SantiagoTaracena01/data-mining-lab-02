@@ -6,21 +6,14 @@ Marco Orozco (20857) y Santiago Taracena (20017)
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 data = pd.read_csv("./data/breast-cancer-wisconsin.csv")
 
 data["bare_nuclei"] = data["bare_nuclei"].apply(lambda x: 0 if (x == "?") else int(x))
 
-# 1.1 exploración rápida del dataset
-print(data.head())
-print(data.isnull().mean())
-print(data.describe())
-
-# 1.2 tipos de datos
-print(data.dtypes)
-
 # 1.3 gráficos chetos
 
-import seaborn as sns
-
-sns.pairplot(data, hue="class")
+sns.catplot(x="class", y="uniformity_cell_size", data=data, kind="boxen", height=4, aspect=2)
+plt.show()
